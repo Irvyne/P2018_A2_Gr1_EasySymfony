@@ -49,6 +49,9 @@ class User
      */
     private $gender;
 
+    const GENDER_MALE   = true;
+    const GENDER_FEMALE = false;
+
 
     /**
      * Get id
