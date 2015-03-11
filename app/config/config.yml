@@ -29,6 +29,8 @@ framework:
 twig:
     debug:            "%kernel.debug%"
     strict_variables: "%kernel.debug%"
+    globals:
+        google_site_id: "%google_site_id%"
 
 # Assetic Configuration
 assetic:

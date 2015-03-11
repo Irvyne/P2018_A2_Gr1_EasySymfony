@@ -1,0 +1,9 @@
+{% extends 'layout.html.twig' %}
+
+{% block content %}
+    <h1>Twig {{ app.request.getLocale() }} !</h1>
+    {# flnezfnzefl #}
+    <p>
+        {{ content|default|replace({'and': 'ABC'})|raw }}
+    </p>
+{% endblock %}
