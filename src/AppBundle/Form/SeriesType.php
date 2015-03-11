@@ -16,10 +16,13 @@ class SeriesType extends AbstractType
     {
         $builder
             ->add('name')
-            ->add('releasedAt')
+            ->add('releasedAt', 'date', [
+                'years' => range(1900, date('Y')+5),
+                'data'  => new \DateTime(),
+            ])
             ->add('summary')
             ->add('picture')
-            ->add('country')
+            ->add('country', 'country')
         ;
     }
     
