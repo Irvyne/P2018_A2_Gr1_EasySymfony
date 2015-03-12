@@ -1,9 +1,24 @@
-{% extends '::base.html.twig' %}
+{% extends '::layout.html.twig' %}
 
-{% block body -%}
-    <h1>Series list</h1>
+{% block content -%}
+    <section>
+        <h1>Series list</h1>
 
-    <table class="records_list">
+        {% for serie in series %}
+            <article>
+                <header>
+                    <figure>
+                        <img src="{{ serie.picture }}" alt="picture" title="{{ serie.name }}">
+                        <figcaption>
+
+                        </figcaption>
+                    </figure>
+                </header>
+            </article>
+        {% endfor %}
+    </section>
+
+    {#<table class="records_list">
         <thead>
             <tr>
                 <th>Id</th>
@@ -45,5 +60,5 @@
                 Create a new entry
             </a>
         </li>
-    </ul>
-    {% endblock %}
+    </ul>#}
+{% endblock %}

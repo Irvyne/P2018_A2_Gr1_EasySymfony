@@ -15,7 +15,12 @@ class SeriesType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name')
+            ->add('name', null, [
+                'attr' => [
+                    'class'    => 'custom-text',
+                    'data-url' => 'https://google.com',
+                ],
+            ])
             ->add('releasedAt', 'date', [
                 'years' => range(1900, date('Y')+5),
                 'data'  => new \DateTime(),

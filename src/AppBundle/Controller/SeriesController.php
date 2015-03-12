@@ -29,10 +29,10 @@ class SeriesController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entities = $em->getRepository('AppBundle:Series')->findAll();
+        $series = $em->getRepository('AppBundle:Series')->findAll();
 
         return array(
-            'entities' => $entities,
+            'series' => $series,
         );
     }
     /**
