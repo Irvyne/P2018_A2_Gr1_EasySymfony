@@ -23,7 +23,6 @@ class SeriesController extends Controller
      *
      * @Route("/", name="series")
      * @Method("GET")
-     * @Template()
      */
     public function indexAction()
     {
@@ -31,35 +30,35 @@ class SeriesController extends Controller
 
         $series = $em->getRepository('AppBundle:Series')->findAll();
 
-        return array(
+        return $this->render('AppBundle:Series:index.html.twig', [
             'series' => $series,
-        );
+        ]);
     }
+
     /**
      * Creates a new Series entity.
      *
-     * @Route("/", name="series_create")
-     * @Method("POST")
-     * @Template("AppBundle:Series:new.html.twig")
+     * @Route("/create", name="series_create")
+     * @Method("GET|POST")
      */
     public function createAction(Request $request)
     {
-        $entity = new Series();
-        $form = $this->createCreateForm($entity);
+        $series = new Series();
+        $form = $this->createCreateForm($series);
         $form->handleRequest($request);
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $em->persist($entity);
+            $em->persist($series);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('series_show', array('id' => $entity->getId())));
+            return $this->redirect($this->generateUrl('series_show', array('id' => $series->getId())));
         }
 
-        return array(
-            'entity' => $entity,
+        return $this->render('AppBundle:Series:new.html.twig', [
+            'series' => $series,
             'form'   => $form->createView(),
-        );
+        ]);
     }
 
     /**
@@ -79,24 +78,6 @@ class SeriesController extends Controller
         $form->add('submit', 'submit', array('label' => 'Create'));
 
         return $form;
-    }
-
-    /**
-     * Displays a form to create a new Series entity.
-     *
-     * @Route("/new", name="series_new")
-     * @Method("GET")
-     * @Template()
-     */
-    public function newAction()
-    {
-        $entity = new Series();
-        $form   = $this->createCreateForm($entity);
-
-        return array(
-            'entity' => $entity,
-            'form'   => $form->createView(),
-        );
     }
 
     /**
