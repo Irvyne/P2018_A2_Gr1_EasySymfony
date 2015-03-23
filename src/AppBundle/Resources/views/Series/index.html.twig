@@ -2,7 +2,13 @@
 
 {% block content -%}
     <section class="row">
-        <h1>Series list</h1>
+        <h1>
+            Series list
+            <a class="btn btn-primary" href="{{ path('series_create') }}">
+                <i class="glyphicon glyphicon-plus-sign"></i>
+                Ajouter
+            </a>
+        </h1>
 
         {% for serie in series %}
             <article class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
@@ -22,17 +28,13 @@
                 </footer>
                 <aside>
                     <div class="btn-group" role="group" aria-label="actions">
-                        <a href="#" class="btn btn-primary">
+                        <a href="{{ path('series_show', {'id': serie.id}) }}" class="btn btn-primary">
                             <i class="glyphicon glyphicon-king"></i>
                             Show
                         </a>
-                        <a href="#" class="btn btn-warning">
+                        <a href="{{ path('series_edit', {'id': serie.id}) }}" class="btn btn-warning">
                             <i class="glyphicon glyphicon-edit"></i>
                             Edit
-                        </a>
-                        <a href="#" class="btn btn-danger">
-                            <i class="glyphicon glyphicon-trash"></i>
-                            Remove
                         </a>
                     </div>
                 </aside>

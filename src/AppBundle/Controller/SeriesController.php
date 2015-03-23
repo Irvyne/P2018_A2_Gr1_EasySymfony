@@ -44,7 +44,11 @@ class SeriesController extends Controller
     public function createAction(Request $request)
     {
         $series = new Series();
-        $form = $this->createCreateForm($series);
+        $form = $this->createForm(new SeriesType(), $series, array(
+            'action' => $this->generateUrl('series_create'),
+            'method' => 'POST',
+        ));
+        $form->add('submit', 'submit', array('label' => 'Create'));
         $form->handleRequest($request);
 
         if ($form->isValid()) {
@@ -59,25 +63,6 @@ class SeriesController extends Controller
             'series' => $series,
             'form'   => $form->createView(),
         ]);
-    }
-
-    /**
-     * Creates a form to create a Series entity.
-     *
-     * @param Series $entity The entity
-     *
-     * @return \Symfony\Component\Form\Form The form
-     */
-    private function createCreateForm(Series $entity)
-    {
-        $form = $this->createForm(new SeriesType(), $entity, array(
-            'action' => $this->generateUrl('series_create'),
-            'method' => 'POST',
-        ));
-
-        $form->add('submit', 'submit', array('label' => 'Create'));
-
-        return $form;
     }
 
     /**
