@@ -7,6 +7,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use AppBundle\Entity\Series;
 use AppBundle\Form\SeriesType;
 
@@ -70,104 +71,54 @@ class SeriesController extends Controller
      *
      * @Route("/{id}", name="series_show")
      * @Method("GET")
-     * @Template()
      */
-    public function showAction($id)
+    public function showAction(Series $series)
     {
-        $em = $this->getDoctrine()->getManager();
+        $deleteForm = $this->createDeleteForm($series->getId());
 
-        $entity = $em->getRepository('AppBundle:Series')->find($id);
-
-        if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Series entity.');
-        }
-
-        $deleteForm = $this->createDeleteForm($id);
-
-        return array(
-            'entity'      => $entity,
+        return $this->render('AppBundle:Series:show.html.twig', [
+            'series'      => $series,
             'delete_form' => $deleteForm->createView(),
-        );
+        ]);
     }
 
-    /**
-     * Displays a form to edit an existing Series entity.
-     *
-     * @Route("/{id}/edit", name="series_edit")
-     * @Method("GET")
-     * @Template()
-     */
-    public function editAction($id)
-    {
-        $em = $this->getDoctrine()->getManager();
-
-        $entity = $em->getRepository('AppBundle:Series')->find($id);
-
-        if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Series entity.');
-        }
-
-        $editForm = $this->createEditForm($entity);
-        $deleteForm = $this->createDeleteForm($id);
-
-        return array(
-            'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
-        );
-    }
-
-    /**
-    * Creates a form to edit a Series entity.
-    *
-    * @param Series $entity The entity
-    *
-    * @return \Symfony\Component\Form\Form The form
-    */
-    private function createEditForm(Series $entity)
-    {
-        $form = $this->createForm(new SeriesType(), $entity, array(
-            'action' => $this->generateUrl('series_update', array('id' => $entity->getId())),
-            'method' => 'PUT',
-        ));
-
-        $form->add('submit', 'submit', array('label' => 'Update'));
-
-        return $form;
-    }
     /**
      * Edits an existing Series entity.
      *
-     * @Route("/{id}", name="series_update")
-     * @Method("PUT")
-     * @Template("AppBundle:Series:edit.html.twig")
+     * @Route("/update/{id}", name="series_update")
+     * @Method("GET|PUT")
      */
     public function updateAction(Request $request, $id)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('AppBundle:Series')->find($id);
+        $series = $em->getRepository('AppBundle:Series')->find($id);
 
-        if (!$entity) {
+        if (!$series) {
             throw $this->createNotFoundException('Unable to find Series entity.');
         }
 
         $deleteForm = $this->createDeleteForm($id);
-        $editForm = $this->createEditForm($entity);
+        $editForm = $this->createForm(new SeriesType(), $series, array(
+            'action' => $this->generateUrl('series_update', array('id' => $series->getId())),
+            'method' => 'PUT',
+        ));
+        $editForm->add('submit', 'submit', array('label' => 'Update'));
         $editForm->handleRequest($request);
 
         if ($editForm->isValid()) {
             $em->flush();
 
-            return $this->redirect($this->generateUrl('series_edit', array('id' => $id)));
+            return $this->redirect($this->generateUrl('series'));
         }
 
-        return array(
-            'entity'      => $entity,
+        return $this->render('AppBundle:Series:edit.html.twig', [
+            'series'      => $series,
             'edit_form'   => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
-        );
+        ]);
     }
+
     /**
      * Deletes a Series entity.
      *
