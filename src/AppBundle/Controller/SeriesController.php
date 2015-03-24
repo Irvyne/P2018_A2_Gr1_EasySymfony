@@ -88,17 +88,11 @@ class SeriesController extends Controller
      * @Route("/update/{id}", name="series_update")
      * @Method("GET|PUT")
      */
-    public function updateAction(Request $request, $id)
+    public function updateAction(Request $request, Series $series)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $series = $em->getRepository('AppBundle:Series')->find($id);
-
-        if (!$series) {
-            throw $this->createNotFoundException('Unable to find Series entity.');
-        }
-
-        $deleteForm = $this->createDeleteForm($id);
+        $deleteForm = $this->createDeleteForm($series->getId());
         $editForm = $this->createForm(new SeriesType(), $series, array(
             'action' => $this->generateUrl('series_update', array('id' => $series->getId())),
             'method' => 'PUT',
