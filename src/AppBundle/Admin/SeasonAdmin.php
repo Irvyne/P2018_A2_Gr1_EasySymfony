@@ -8,25 +8,15 @@ use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
 
-class SeriesAdmin extends Admin
+class SeasonAdmin extends Admin
 {
     // Fields to be shown on create/edit forms
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->add('name', null, [
-                'attr' => [
-                    'class'    => 'custom-text',
-                    'data-url' => 'https://google.com',
-                ],
-            ])
-            ->add('releasedAt', 'date', [
-                'years' => range(1900, date('Y')+5),
-                'data'  => new \DateTime(),
-            ])
+            ->add('number')
+            ->add('releasedAt')
             ->add('summary')
-            ->add('picture')
-            ->add('country', 'country')
         ;
     }
 
@@ -34,9 +24,8 @@ class SeriesAdmin extends Admin
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper
-            ->add('name')
+            ->add('number')
             ->add('releasedAt')
-            ->add('country')
         ;
     }
 
@@ -45,9 +34,9 @@ class SeriesAdmin extends Admin
     {
         $listMapper
             ->addIdentifier('id')
-            ->add('name')
+            ->add('number')
             ->add('releasedAt')
-            ->add('country')
+            ->add('summary')
             ->add('_action', 'actions', [
                 'actions' => [
                     'show'   => [],
@@ -63,11 +52,9 @@ class SeriesAdmin extends Admin
     {
         $showMapper
             ->add('id')
-            ->add('name')
+            ->add('number')
             ->add('releasedAt')
             ->add('summary')
-            ->add('picture')
-            ->add('country')
         ;
     }
 }

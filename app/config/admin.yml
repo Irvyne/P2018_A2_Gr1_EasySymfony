@@ -4,3 +4,8 @@ services:
         arguments: [ ~, AppBundle\Entity\Series, ~ ]
         tags:
             - { name: sonata.admin, manager_type: orm, group: "Series", label: "Series" }
+    sonata.admin.season:
+        class: AppBundle\Admin\SeasonAdmin
+        arguments: [ ~, AppBundle\Entity\Season, ~ ]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Series", label: "Season" }
