@@ -42,6 +42,13 @@ class Season
      */
     private $summary;
 
+    /**
+     * @var Series
+     *
+     * @ORM\ManyToOne(targetEntity="Series")
+     */
+    private $series;
+
 
     /**
      * Get id
@@ -120,5 +127,28 @@ class Season
     public function getSummary()
     {
         return $this->summary;
+    }
+
+    /**
+     * Set series
+     *
+     * @param Series $series
+     * @return Season
+     */
+    public function setSeries(Series $series = null)
+    {
+        $this->series = $series;
+
+        return $this;
+    }
+
+    /**
+     * Get series
+     *
+     * @return Series
+     */
+    public function getSeries()
+    {
+        return $this->series;
     }
 }

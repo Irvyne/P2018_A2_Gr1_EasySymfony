@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Series
@@ -15,8 +16,8 @@ class Series
     /**
      * @var integer
      *
-     * @ORM\Column(name="id", type="integer")
      * @ORM\Id
+     * @ORM\Column(name="id", type="integer")
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
@@ -56,6 +57,21 @@ class Series
      */
     private $country;
 
+    /**
+     * @var
+     *
+     * @ORM\ManyToMany(targetEntity="Genre", cascade={"persist"})
+     */
+    private $genres;
+
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->genres = new ArrayCollection();
+    }
 
     /**
      * Get id
@@ -180,5 +196,46 @@ class Series
     public function getCountry()
     {
         return $this->country;
+    }
+
+    /**
+     * Add genres
+     *
+     * @param Genre $genres
+     * @return Series
+     */
+    public function addGenre(Genre $genres)
+    {
+        $this->genres[] = $genres;
+
+        return $this;
+    }
+
+    /**
+     * Remove genres
+     *
+     * @param Genre $genres
+     */
+    public function removeGenre(Genre $genres)
+    {
+        $this->genres->removeElement($genres);
+    }
+
+    /**
+     * Get genres
+     *
+     * @return ArrayCollection
+     */
+    public function getGenres()
+    {
+        return $this->genres;
+    }
+
+    /**
+     * @return string
+     */
+    public function __toString()
+    {
+        return $this->name;
     }
 }

@@ -2,6 +2,7 @@
 
 namespace AppBundle\Admin;
 
+use AppBundle\Form\GenreType;
 use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
@@ -26,6 +27,11 @@ class SeriesAdmin extends Admin
             ])
             ->add('summary')
             ->add('picture')
+            ->add('genres'/*, 'collection', [
+                'type' => new GenreType(),
+                'allow_add' => true,
+                'by_reference' => false,
+            ]*/)
             ->add('country', 'country')
         ;
     }
@@ -47,6 +53,7 @@ class SeriesAdmin extends Admin
             ->addIdentifier('id')
             ->add('name')
             ->add('releasedAt')
+            ->add('genres')
             ->add('country')
             ->add('_action', 'actions', [
                 'actions' => [
@@ -67,6 +74,7 @@ class SeriesAdmin extends Admin
             ->add('releasedAt')
             ->add('summary')
             ->add('picture')
+            ->add('genres')
             ->add('country')
         ;
     }

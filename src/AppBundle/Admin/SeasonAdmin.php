@@ -14,6 +14,7 @@ class SeasonAdmin extends Admin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
+            ->add('series')
             ->add('number')
             ->add('releasedAt')
             ->add('summary')
@@ -24,6 +25,7 @@ class SeasonAdmin extends Admin
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper
+            ->add('series')
             ->add('number')
             ->add('releasedAt')
         ;
@@ -34,6 +36,7 @@ class SeasonAdmin extends Admin
     {
         $listMapper
             ->addIdentifier('id')
+            ->add('series')
             ->add('number')
             ->add('releasedAt')
             ->add('summary')
@@ -52,6 +55,7 @@ class SeasonAdmin extends Admin
     {
         $showMapper
             ->add('id')
+            ->add('series')
             ->add('number')
             ->add('releasedAt')
             ->add('summary')
