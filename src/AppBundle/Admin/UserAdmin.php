@@ -27,7 +27,7 @@ class UserAdmin extends Admin
                     User::GENDER_MALE   => 'Male',
                     User::GENDER_FEMALE => 'Female',
                 ],
-                'data' => true === $isNew ? User::GENDER_FEMALE : null,
+                'data' => true === $isNew ? User::GENDER_FEMALE : $this->getSubject()->getGender(),
             ])
         ;
     }
