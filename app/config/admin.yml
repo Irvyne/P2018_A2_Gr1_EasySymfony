@@ -9,3 +9,23 @@ services:
         arguments: [ ~, AppBundle\Entity\Season, ~ ]
         tags:
             - { name: sonata.admin, manager_type: orm, group: "Series", label: "Season" }
+    sonata.admin.episode:
+        class: AppBundle\Admin\EpisodeAdmin
+        arguments: [ ~, AppBundle\Entity\Episode, ~ ]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Series", label: "Episode" }
+    sonata.admin.genre:
+        class: AppBundle\Admin\GenreAdmin
+        arguments: [ ~, AppBundle\Entity\Genre, ~ ]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Series", label: "Genre" }
+    sonata.admin.review:
+        class: AppBundle\Admin\ReviewAdmin
+        arguments: [ ~, AppBundle\Entity\Review, ~ ]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Users", label: "Review" }
+    sonata.admin.user:
+        class: AppBundle\Admin\UserAdmin
+        arguments: [ ~, AppBundle\Entity\User, ~ ]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Users", label: "Users" }
