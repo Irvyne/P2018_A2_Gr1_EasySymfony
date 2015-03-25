@@ -14,6 +14,8 @@ class UserAdmin extends Admin
     // Fields to be shown on create/edit forms
     protected function configureFormFields(FormMapper $formMapper)
     {
+        $isNew = null === $this->getSubject()->getId() ? true : false;
+
         $formMapper
             ->add('lastName')
             ->add('firstName')
@@ -25,7 +27,7 @@ class UserAdmin extends Admin
                     User::GENDER_MALE   => 'Male',
                     User::GENDER_FEMALE => 'Female',
                 ],
-                'data' => User::GENDER_FEMALE,
+                'data' => true === $isNew ? User::GENDER_FEMALE : null,
             ])
         ;
     }
@@ -36,7 +38,13 @@ class UserAdmin extends Admin
         $datagridMapper
             ->add('lastName')
             ->add('firstName')
-            ->add('gender')
+            //->add('birthday', null, [], 'date')
+            ->add('gender', null, [], 'choice', [
+                'choices' => [
+                    User::GENDER_MALE   => 'Male',
+                    User::GENDER_FEMALE => 'Female',
+                ],
+            ])
         ;
     }
 
@@ -48,7 +56,12 @@ class UserAdmin extends Admin
             ->add('lastName')
             ->add('firstName')
             ->add('birthday')
-            ->add('gender')
+            ->add('gender', 'choice', [
+                'choices' => [
+                    User::GENDER_MALE   => 'Male',
+                    User::GENDER_FEMALE => 'Female',
+                ],
+            ])
             ->add('_action', 'actions', [
                 'actions' => [
                     'show'   => [],
