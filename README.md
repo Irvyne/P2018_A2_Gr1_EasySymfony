@@ -8,7 +8,7 @@
 ## Create a little Blog (like a tiny wordpress)
 
 * Create a new Symfony2 project (Yes, a new **fresh install** is needed!)  
-* Put in on GitHub (don't add ```app/bootstrap.php.cache```, ```app/cache/*```, ```app/logs/*```,  ```web/bundles```, ```vendor/```, ```bin``` in the repo)
+* Put in on GitHub (don't add ```app/bootstrap.php.cache```, ```app/cache/*```, ```app/logs/*```,  ```web/bundles```, ```vendor/``` and ```bin``` in the repo)
 
 ### Entities (don't forget relationships)
 
@@ -24,8 +24,8 @@
 
 ### Admin
 
-* Sonata Admin
-* Manage all entities (CRUD)
+* Install and configure Sonata Admin Bundle
+* Manage all entities (CRUD) with Sonata Admin (not via ```php app/console generate:doctrine:crud```)
 
 ### Bonus
 
