@@ -15,8 +15,8 @@ class Review
     /**
      * @var integer
      *
-     * @ORM\Column(name="id", type="integer")
      * @ORM\Id
+     * @ORM\Column(name="id", type="integer")
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
@@ -34,6 +34,21 @@ class Review
      * @ORM\Column(name="rating", type="smallint")
      */
     private $rating;
+
+    /**
+     * @var User
+     *
+     * @ORM\ManyToOne(targetEntity="User", cascade={"remove"})
+     * //orphanRemoval=true
+     */
+    private $user;
+
+    /**
+     * @var Series
+     *
+     * @ORM\ManyToOne(targetEntity="Series", cascade={"persist"})
+     */
+    private $series;
 
 
     /**
@@ -90,5 +105,51 @@ class Review
     public function getRating()
     {
         return $this->rating;
+    }
+
+    /**
+     * Set user
+     *
+     * @param \AppBundle\Entity\User $user
+     * @return Review
+     */
+    public function setUser(\AppBundle\Entity\User $user = null)
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return \AppBundle\Entity\User 
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
+
+    /**
+     * Set series
+     *
+     * @param \AppBundle\Entity\Series $series
+     * @return Review
+     */
+    public function setSeries(\AppBundle\Entity\Series $series = null)
+    {
+        $this->series = $series;
+
+        return $this;
+    }
+
+    /**
+     * Get series
+     *
+     * @return \AppBundle\Entity\Series 
+     */
+    public function getSeries()
+    {
+        return $this->series;
     }
 }

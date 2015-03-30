@@ -14,6 +14,7 @@ class EpisodeAdmin extends Admin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
+            ->add('season')
             ->add('name')
             ->add('number')
             ->add('summary')
@@ -29,6 +30,7 @@ class EpisodeAdmin extends Admin
             ->add('name')
             ->add('number')
             ->add('duration')
+            ->add('season')
         ;
     }
 
@@ -39,6 +41,7 @@ class EpisodeAdmin extends Admin
             ->addIdentifier('id')
             ->add('name')
             ->add('number')
+            ->add('season')
             ->add('summary')
             ->add('picture')
             ->add('duration')
@@ -59,6 +62,7 @@ class EpisodeAdmin extends Admin
             ->add('id')
             ->add('name')
             ->add('number')
+            ->add('season')
             ->add('summary')
             ->add('picture')
             ->add('duration')

@@ -151,4 +151,13 @@ class Season
     {
         return $this->series;
     }
+
+    /**
+     * @return string
+     */
+    public function __toString()
+    {
+        return $this->getSeries()->getName().' - Season '.$this->getNumber();
+        //return (string)$this->getNumber();
+    }
 }

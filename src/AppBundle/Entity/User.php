@@ -154,4 +154,9 @@ class User
     {
         return $this->gender;
     }
+
+    public function __toString()
+    {
+        return $this->getFirstName().' '.$this->getLastName();
+    }
 }

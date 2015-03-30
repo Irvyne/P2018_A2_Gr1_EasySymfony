@@ -56,6 +56,13 @@ class Episode
      */
     private $duration;
 
+    /**
+     * @var Season
+     *
+     * @ORM\ManyToOne(targetEntity="Season")
+     */
+    private $season;
+
 
     /**
      * Get id
@@ -180,5 +187,29 @@ class Episode
     public function getDuration()
     {
         return $this->duration;
+    }
+
+    /**
+     * Set season
+     *
+     * @param Season $season
+     *
+     * @return Episode
+     */
+    public function setSeason(Season $season = null)
+    {
+        $this->season = $season;
+
+        return $this;
+    }
+
+    /**
+     * Get season
+     *
+     * @return Season
+     */
+    public function getSeason()
+    {
+        return $this->season;
     }
 }

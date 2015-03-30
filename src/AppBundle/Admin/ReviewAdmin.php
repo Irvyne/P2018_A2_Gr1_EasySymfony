@@ -14,6 +14,8 @@ class ReviewAdmin extends Admin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
+            ->add('series')
+            ->add('user')
             ->add('content')
             ->add('rating')
         ;
@@ -23,7 +25,8 @@ class ReviewAdmin extends Admin
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper
-            ->add('content')
+            ->add('series')
+            ->add('user')
             ->add('rating')
         ;
     }
@@ -33,7 +36,8 @@ class ReviewAdmin extends Admin
     {
         $listMapper
             ->addIdentifier('id')
-            ->add('content')
+            ->add('series')
+            ->add('user')
             ->add('rating')
             ->add('_action', 'actions', [
                 'actions' => [
@@ -50,6 +54,8 @@ class ReviewAdmin extends Admin
     {
         $showMapper
             ->add('id')
+            ->add('series')
+            ->add('user')
             ->add('content')
             ->add('rating')
         ;
